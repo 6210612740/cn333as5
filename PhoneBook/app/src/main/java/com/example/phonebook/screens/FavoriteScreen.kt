@@ -1,4 +1,4 @@
-package com.example.mynotes.screens
+package com.example.phonebook.screens
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 
 @ExperimentalMaterialApi
 @Composable
-fun ContactScreen(viewModel: MainViewModel) {
+fun FavoriteScreen(viewModel: MainViewModel) {
     val contacts by viewModel.contactsNotInTrash.observeAsState(listOf())
     val scaffoldState: ScaffoldState = rememberScaffoldState()
     val coroutineScope = rememberCoroutineScope()
@@ -30,7 +30,7 @@ fun ContactScreen(viewModel: MainViewModel) {
             TopAppBar(
                 title = {
                     Text(
-                        text = "My Contacts",
+                        text = "My Favorite Contacts",
                         color = MaterialTheme.colors.onPrimary
                     )
                 },
@@ -71,7 +71,7 @@ fun ContactScreen(viewModel: MainViewModel) {
         }
     ) {
         if (contacts.isNotEmpty()) {
-            ContactsList(
+            FavoritesList(
                 contacts = contacts.sortedBy { it.name },
                 onContactCheckedChange = {
                     viewModel.onContactCheckedChange(it)
@@ -84,14 +84,15 @@ fun ContactScreen(viewModel: MainViewModel) {
 
 @ExperimentalMaterialApi
 @Composable
-private fun ContactsList(
+private fun FavoritesList(
     contacts: List<ContactModel>,
     onContactCheckedChange: (ContactModel) -> Unit,
     onContactClick: (ContactModel) -> Unit
 ) {
+    val favorite = contacts.filter{ it.isFavorite }
     LazyColumn {
-        items(count = contacts.size) { noteIndex ->
-            val contact = contacts[noteIndex]
+        items(count = favorite.size) { noteIndex ->
+            val contact = favorite[noteIndex]
             Contact(
                 contact = contact,
                 onContactClick = onContactClick,
@@ -105,11 +106,11 @@ private fun ContactsList(
 @ExperimentalMaterialApi
 @Preview
 @Composable
-private fun ContactsListPreview() {
-    ContactsList(
+private fun FavoritesListPreview() {
+    FavoritesList(
         contacts = listOf(
             ContactModel(1, "B", "Content 1", null,false),
-            ContactModel(2, "A", "Content 2", false,false),
+            ContactModel(2, "A", "Content 2", false, true),
             ContactModel(3, "F", "Content 3", true,true)
         ).sortedBy { it.name },
         onContactCheckedChange = {},

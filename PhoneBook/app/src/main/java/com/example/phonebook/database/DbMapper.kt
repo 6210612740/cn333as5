@@ -21,7 +21,7 @@ class DbMapper {
     fun mapContact(contactDbModel: ContactDbModel, tagDbModel: TagDbModel): ContactModel {
         val tag = mapTag(tagDbModel)
         val isCheckedOff = with(contactDbModel) { if (canBeCheckedOff) isCheckedOff else null }
-        return with(contactDbModel) { ContactModel(id, name, content, isCheckedOff, tag) }
+        return with(contactDbModel) { ContactModel(id, name, content, isCheckedOff,  isFavorite, tag,) }
     }
 
     // convert list of TagDdModels to list of TagModels
@@ -37,6 +37,7 @@ class DbMapper {
         with(contact) {
             val canBeCheckedOff = isCheckedOff != null
             val isCheckedOff = isCheckedOff ?: false
+            val isFavorite = isFavorite
             if (id == NEW_CONTACT_ID)
                 ContactDbModel(
                     name = name,
@@ -44,9 +45,10 @@ class DbMapper {
                     canBeCheckedOff = canBeCheckedOff,
                     isCheckedOff = isCheckedOff,
                     tagId = tag.id,
-                    isInTrash = false
+                    isInTrash = false,
+                    isFavorite = isFavorite
                 )
             else
-                ContactDbModel(id, name, content, canBeCheckedOff, isCheckedOff, tag.id, false)
+                ContactDbModel(id, name, content, canBeCheckedOff, isCheckedOff, tag.id, false, isFavorite)
         }
 }

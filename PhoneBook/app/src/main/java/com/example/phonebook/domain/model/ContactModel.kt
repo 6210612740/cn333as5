@@ -7,5 +7,7 @@ data class ContactModel(
     val name: String = "",
     val content: String = "",
     val isCheckedOff: Boolean? = null, // null represents that the note can't be checked off
+    val isFavorite: Boolean = false,
     val tag: TagModel = TagModel.DEFAULT
+
 )

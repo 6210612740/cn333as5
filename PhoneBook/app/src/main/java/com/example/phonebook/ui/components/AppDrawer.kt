@@ -10,6 +10,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -171,10 +172,19 @@ fun AppDrawer(
 
         ScreenNavigationButton(
             icon = Icons.Filled.Home,
-            label = "Notes",
+            label = "Contacts",
             isSelected = currentScreen == Screen.Contacts,
             onClick = {
                 PhoneNumberRouter.navigateTo(Screen.Contacts)
+                closeDrawerAction()
+            }
+        )
+        ScreenNavigationButton(
+            icon = Icons.Filled.Star,
+            label = "Favorite",
+            isSelected = currentScreen == Screen.Contacts,
+            onClick = {
+                PhoneNumberRouter.navigateTo(Screen.Favorite)
                 closeDrawerAction()
             }
         )
@@ -187,6 +197,7 @@ fun AppDrawer(
                 closeDrawerAction()
             }
         )
+
         LightDarkThemeItem()
     }
 }

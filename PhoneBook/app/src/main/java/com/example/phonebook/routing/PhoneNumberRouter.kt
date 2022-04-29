@@ -10,6 +10,7 @@ sealed class Screen {
     object Contacts: Screen()
     object SaveContact: Screen()
     object Trash: Screen()
+    object Favorite: Screen()
 }
 
 object PhoneNumberRouter {

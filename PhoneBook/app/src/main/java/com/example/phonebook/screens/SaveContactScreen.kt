@@ -181,6 +181,16 @@ private fun SaveContactContent(
     onContactChange: (ContactModel) -> Unit
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
+        val isChecked: Boolean = contact.isFavorite
+
+        FavoriteCheckOption(
+            isChecked = isChecked,
+            onCheckedChange = { FavoriteNewValue ->
+                val isCheckedOff: Boolean = if (FavoriteNewValue) true else false
+
+                onContactChange.invoke(contact.copy(isFavorite = isCheckedOff))
+            }
+        )
         ContentTextField(
             label = "Name",
             text = contact.name,
@@ -234,6 +244,28 @@ private fun ContentTextField(
         )
     )
 }
+@Composable
+private fun FavoriteCheckOption(
+    isChecked: Boolean,
+    onCheckedChange: (Boolean) -> Unit
+) {
+    Row(
+        Modifier
+            .padding(8.dp)
+            .padding(top = 16.dp)
+    ) {
+        Text(
+            text = "Is this Contact is favorite?",
+            modifier = Modifier.weight(1f)
+        )
+        Switch(
+            checked = isChecked,
+            onCheckedChange = onCheckedChange,
+            modifier = Modifier.padding(start = 8.dp)
+        )
+    }
+}
+
 
 @Composable
 private fun ContactCheckOption(

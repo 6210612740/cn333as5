@@ -17,6 +17,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mynotes.screens.ContactScreen
 import com.example.phonebook.routing.PhoneNumberRouter
 import com.example.phonebook.routing.Screen
+import com.example.phonebook.screens.FavoriteScreen
 import com.example.phonebook.screens.SaveContactScreen
 import com.example.phonebook.screens.TrashScreen
 import com.example.phonebook.ui.theme.PhoneBookTheme
@@ -48,6 +49,7 @@ fun MainActivityScreen(viewModel: MainViewModel) {
             is Screen.Contacts -> ContactScreen(viewModel)
             is Screen.SaveContact -> SaveContactScreen(viewModel)
             is Screen.Trash -> TrashScreen(viewModel)
+            is Screen.Favorite -> FavoriteScreen(viewModel)
         }
     }
 }

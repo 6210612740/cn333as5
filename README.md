@@ -6,7 +6,10 @@
 
 Can add, edit, delete Contact
  
+### Extra Function
+
+Can add favorite contact
 
 ### LINK
 
-https://youtu.be/lZYCYNnpx8c
+https://youtu.be/H6tK-oM_PCM
